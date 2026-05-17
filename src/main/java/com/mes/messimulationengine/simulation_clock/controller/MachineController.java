@@ -3,6 +3,8 @@ package com.mes.messimulationengine.simulation_clock.controller;
 import com.mes.messimulationengine.simulation_clock.Repository.MachineRepository;
 import com.mes.messimulationengine.simulation_clock.data.Machine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +24,13 @@ public class MachineController {
     }
 
     @GetMapping("/machineList")
-    public List<Machine> findMachines(){
-        return machineRepository.getAllMachines();
+    public ResponseEntity<List<Machine>> findMachines(){
+        return ResponseEntity
+                .status(HttpStatus.ACCEPTED)
+                .header("continent","Accepted")
+                        .body(machineRepository.getAllMachines());
+
+//        machineRepository.getAllMachines();
     }
 
     @PostMapping("/addMachine")
@@ -31,7 +38,9 @@ public class MachineController {
 
         System.out.println(machine.getMachineName());
         System.out.println(machine.getMachineState());
-
         machineRepository.addMachine(machine);
+
+
+
     }
 }

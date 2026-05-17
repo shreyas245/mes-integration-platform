@@ -32,8 +32,7 @@ public class MachineRepository {
     public void addMachine(Machine machine){
         String sql = "INSERT INTO machine(machineId,machine_name,machine_state) values( ?,?, ?)";
         UUID machineId = UUID.randomUUID();
-        jdbc.update(sql,10,machine.getMachineName(),machine.getMachineState());
+        jdbc.update(sql,11,machine.getMachineName(),machine.getMachineState());
     }
-
 
 }
